@@ -1,4 +1,11 @@
-export const SUITS_DATA = [
+export type Suit = {
+  id: number;
+  title: string;
+  image: string;
+  price: number;
+};
+
+export const SUITS_DATA: Suit[] = [
   {
     id: 1,
     title: 'Slim Fit Black Ecru Suit',

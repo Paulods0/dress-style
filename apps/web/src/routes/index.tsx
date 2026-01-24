@@ -13,12 +13,12 @@ export const Route = createFileRoute('/')({
 
 function RouteComponent() {
   return (
-    <div className="w-full flex flex-col gap-[72px]">
+    <div className='w-full flex flex-col gap-[72px]'>
       <HeroSection />
       <StyleTrendingSection />
       <WeddingSuitSection />
       <MostSellingSection />
-      <div className="bg-zinc-100 w-full p-10">
+      <div className='bg-zinc-100 w-full lg:p-10 p-4'>
         <ScheduleConsultingSection />
       </div>
       <NewsSection />

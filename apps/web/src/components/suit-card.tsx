@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bookmark } from 'lucide-react';
+import { formatPrice } from '@/utils/price';
 import { useNavigate } from '@tanstack/react-router';
 
 interface Props {
@@ -18,29 +19,21 @@ export default function SuitCard({ suit }: Props) {
   return (
     <div
       onClick={() => navigate({ to: '/man/$id', params: { id: suit.id.toString() } })}
-      className="w-full cursor-pointer min-h-[497px] flex flex-col gap-2"
-    >
-      <img src={suit.image} alt="card-image" className="h-full w-full object-cover" />
+      className='w-full cursor-pointer min-h-[497px] flex flex-col gap-2'>
+      <img src={suit.image} alt='card-image' className='h-full w-full object-cover' />
 
-      <div className="flex items-start w-full justify-between">
-        <div className="flex flex-col gap-2">
-          <span className="capitalize">{suit.title}</span>
-          <span>
-            {suit.price.toLocaleString('pt-BT', {
-              style: 'currency',
-              currency: 'AOA',
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}
-          </span>
+      <div className='flex items-start w-full justify-between'>
+        <div className='flex flex-col gap-2'>
+          <span className='capitalize'>{suit.title}</span>
+          <span>{formatPrice(suit.price)}</span>
         </div>
         <Bookmark
           size={18}
           strokeWidth={1}
           fill={isSaved ? '#000' : '#fff'}
-          onClick={e => {
+          onClick={(e) => {
             e.stopPropagation();
-            setIsSaved(prev => !prev);
+            setIsSaved((prev) => !prev);
           }}
         />
       </div>

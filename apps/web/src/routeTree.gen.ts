@@ -8,10 +8,13 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
-
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ManufacturerRouteRouteImport } from './routes/manufacturer/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ManufacturerRegisteredRouteImport } from './routes/manufacturer/registered'
+import { Route as ManufacturerRegisterRouteImport } from './routes/manufacturer/register'
+import { Route as ManufacturerOnboardingRouteImport } from './routes/manufacturer/onboarding'
+import { Route as ManufacturerAccountAndTermsRouteImport } from './routes/manufacturer/account-and-terms'
 import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
 import { Route as AuthLayoutRouteImport } from './routes/auth/_layout'
@@ -27,11 +30,9 @@ import { Route as privatePaymentStep3RouteImport } from './routes/(private)/paym
 import { Route as privatePaymentStep2RouteImport } from './routes/(private)/payment/step-2'
 import { Route as privatePaymentStep1RouteImport } from './routes/(private)/payment/step-1'
 
-const AuthRouteImport = createFileRoute('/auth')()
-
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
+const ManufacturerRouteRoute = ManufacturerRouteRouteImport.update({
+  id: '/manufacturer',
+  path: '/manufacturer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -39,6 +40,27 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ManufacturerRegisteredRoute = ManufacturerRegisteredRouteImport.update({
+  id: '/registered',
+  path: '/registered',
+  getParentRoute: () => ManufacturerRouteRoute,
+} as any)
+const ManufacturerRegisterRoute = ManufacturerRegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => ManufacturerRouteRoute,
+} as any)
+const ManufacturerOnboardingRoute = ManufacturerOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => ManufacturerRouteRoute,
+} as any)
+const ManufacturerAccountAndTermsRoute =
+  ManufacturerAccountAndTermsRouteImport.update({
+    id: '/account-and-terms',
+    path: '/account-and-terms',
+    getParentRoute: () => ManufacturerRouteRoute,
+  } as any)
 const AuthSignUpRoute = AuthSignUpRouteImport.update({
   id: '/sign-up',
   path: '/sign-up',
@@ -112,12 +134,17 @@ const privatePaymentStep1Route = privatePaymentStep1RouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/manufacturer': typeof ManufacturerRouteRouteWithChildren
   '/payment': typeof privatePaymentRouteRouteWithChildren
   '/accessories': typeof publicAccessoriesRoute
   '/cart': typeof publicCartRoute
   '/auth': typeof AuthLayoutRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/manufacturer/account-and-terms': typeof ManufacturerAccountAndTermsRoute
+  '/manufacturer/onboarding': typeof ManufacturerOnboardingRoute
+  '/manufacturer/register': typeof ManufacturerRegisterRoute
+  '/manufacturer/registered': typeof ManufacturerRegisteredRoute
   '/payment/step-1': typeof privatePaymentStep1Route
   '/payment/step-2': typeof privatePaymentStep2Route
   '/payment/step-3': typeof privatePaymentStep3Route
@@ -129,12 +156,17 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/manufacturer': typeof ManufacturerRouteRouteWithChildren
   '/payment': typeof privatePaymentRouteRouteWithChildren
   '/accessories': typeof publicAccessoriesRoute
   '/cart': typeof publicCartRoute
   '/auth': typeof AuthLayoutRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/manufacturer/account-and-terms': typeof ManufacturerAccountAndTermsRoute
+  '/manufacturer/onboarding': typeof ManufacturerOnboardingRoute
+  '/manufacturer/register': typeof ManufacturerRegisterRoute
+  '/manufacturer/registered': typeof ManufacturerRegisteredRoute
   '/payment/step-1': typeof privatePaymentStep1Route
   '/payment/step-2': typeof privatePaymentStep2Route
   '/payment/step-3': typeof privatePaymentStep3Route
@@ -147,13 +179,17 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/manufacturer': typeof ManufacturerRouteRouteWithChildren
   '/(private)/payment': typeof privatePaymentRouteRouteWithChildren
   '/(public)/accessories': typeof publicAccessoriesRoute
   '/(public)/cart': typeof publicCartRoute
-  '/auth': typeof AuthRouteWithChildren
   '/auth/_layout': typeof AuthLayoutRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/manufacturer/account-and-terms': typeof ManufacturerAccountAndTermsRoute
+  '/manufacturer/onboarding': typeof ManufacturerOnboardingRoute
+  '/manufacturer/register': typeof ManufacturerRegisterRoute
+  '/manufacturer/registered': typeof ManufacturerRegisteredRoute
   '/(private)/payment/step-1': typeof privatePaymentStep1Route
   '/(private)/payment/step-2': typeof privatePaymentStep2Route
   '/(private)/payment/step-3': typeof privatePaymentStep3Route
@@ -167,12 +203,17 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/manufacturer'
     | '/payment'
     | '/accessories'
     | '/cart'
     | '/auth'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/manufacturer/account-and-terms'
+    | '/manufacturer/onboarding'
+    | '/manufacturer/register'
+    | '/manufacturer/registered'
     | '/payment/step-1'
     | '/payment/step-2'
     | '/payment/step-3'
@@ -184,12 +225,17 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/manufacturer'
     | '/payment'
     | '/accessories'
     | '/cart'
     | '/auth'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/manufacturer/account-and-terms'
+    | '/manufacturer/onboarding'
+    | '/manufacturer/register'
+    | '/manufacturer/registered'
     | '/payment/step-1'
     | '/payment/step-2'
     | '/payment/step-3'
@@ -201,13 +247,17 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/manufacturer'
     | '/(private)/payment'
     | '/(public)/accessories'
     | '/(public)/cart'
-    | '/auth'
     | '/auth/_layout'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/manufacturer/account-and-terms'
+    | '/manufacturer/onboarding'
+    | '/manufacturer/register'
+    | '/manufacturer/registered'
     | '/(private)/payment/step-1'
     | '/(private)/payment/step-2'
     | '/(private)/payment/step-3'
@@ -220,10 +270,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ManufacturerRouteRoute: typeof ManufacturerRouteRouteWithChildren
   privatePaymentRouteRoute: typeof privatePaymentRouteRouteWithChildren
   publicAccessoriesRoute: typeof publicAccessoriesRoute
   publicCartRoute: typeof publicCartRoute
-  AuthRoute: typeof AuthRouteWithChildren
   publicManIdRoute: typeof publicManIdRoute
   publicWomanIdRoute: typeof publicWomanIdRoute
   publicManIndexRoute: typeof publicManIndexRoute
@@ -232,11 +282,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/manufacturer': {
+      id: '/manufacturer'
+      path: '/manufacturer'
+      fullPath: '/manufacturer'
+      preLoaderRoute: typeof ManufacturerRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -245,6 +295,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/manufacturer/registered': {
+      id: '/manufacturer/registered'
+      path: '/registered'
+      fullPath: '/manufacturer/registered'
+      preLoaderRoute: typeof ManufacturerRegisteredRouteImport
+      parentRoute: typeof ManufacturerRouteRoute
+    }
+    '/manufacturer/register': {
+      id: '/manufacturer/register'
+      path: '/register'
+      fullPath: '/manufacturer/register'
+      preLoaderRoute: typeof ManufacturerRegisterRouteImport
+      parentRoute: typeof ManufacturerRouteRoute
+    }
+    '/manufacturer/onboarding': {
+      id: '/manufacturer/onboarding'
+      path: '/onboarding'
+      fullPath: '/manufacturer/onboarding'
+      preLoaderRoute: typeof ManufacturerOnboardingRouteImport
+      parentRoute: typeof ManufacturerRouteRoute
+    }
+    '/manufacturer/account-and-terms': {
+      id: '/manufacturer/account-and-terms'
+      path: '/account-and-terms'
+      fullPath: '/manufacturer/account-and-terms'
+      preLoaderRoute: typeof ManufacturerAccountAndTermsRouteImport
+      parentRoute: typeof ManufacturerRouteRoute
     }
     '/auth/sign-up': {
       id: '/auth/sign-up'
@@ -262,7 +340,7 @@ declare module '@tanstack/react-router' {
     }
     '/auth/_layout': {
       id: '/auth/_layout'
-      path: '/auth'
+      path: ''
       fullPath: '/auth'
       preLoaderRoute: typeof AuthLayoutRouteImport
       parentRoute: typeof AuthRoute
@@ -347,6 +425,23 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface ManufacturerRouteRouteChildren {
+  ManufacturerAccountAndTermsRoute: typeof ManufacturerAccountAndTermsRoute
+  ManufacturerOnboardingRoute: typeof ManufacturerOnboardingRoute
+  ManufacturerRegisterRoute: typeof ManufacturerRegisterRoute
+  ManufacturerRegisteredRoute: typeof ManufacturerRegisteredRoute
+}
+
+const ManufacturerRouteRouteChildren: ManufacturerRouteRouteChildren = {
+  ManufacturerAccountAndTermsRoute: ManufacturerAccountAndTermsRoute,
+  ManufacturerOnboardingRoute: ManufacturerOnboardingRoute,
+  ManufacturerRegisterRoute: ManufacturerRegisterRoute,
+  ManufacturerRegisteredRoute: ManufacturerRegisteredRoute,
+}
+
+const ManufacturerRouteRouteWithChildren =
+  ManufacturerRouteRoute._addFileChildren(ManufacturerRouteRouteChildren)
+
 interface privatePaymentRouteRouteChildren {
   privatePaymentStep1Route: typeof privatePaymentStep1Route
   privatePaymentStep2Route: typeof privatePaymentStep2Route
@@ -364,26 +459,12 @@ const privatePaymentRouteRouteChildren: privatePaymentRouteRouteChildren = {
 const privatePaymentRouteRouteWithChildren =
   privatePaymentRouteRoute._addFileChildren(privatePaymentRouteRouteChildren)
 
-interface AuthRouteChildren {
-  AuthLayoutRoute: typeof AuthLayoutRoute
-  AuthSignInRoute: typeof AuthSignInRoute
-  AuthSignUpRoute: typeof AuthSignUpRoute
-}
-
-const AuthRouteChildren: AuthRouteChildren = {
-  AuthLayoutRoute: AuthLayoutRoute,
-  AuthSignInRoute: AuthSignInRoute,
-  AuthSignUpRoute: AuthSignUpRoute,
-}
-
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ManufacturerRouteRoute: ManufacturerRouteRouteWithChildren,
   privatePaymentRouteRoute: privatePaymentRouteRouteWithChildren,
   publicAccessoriesRoute: publicAccessoriesRoute,
   publicCartRoute: publicCartRoute,
-  AuthRoute: AuthRouteWithChildren,
   publicManIdRoute: publicManIdRoute,
   publicWomanIdRoute: publicWomanIdRoute,
   publicManIndexRoute: publicManIndexRoute,

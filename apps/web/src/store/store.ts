@@ -1,10 +1,12 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import cartReducer from './cart-slice';
-import { persistReducer, persistStore } from 'redux-persist';
+import paymentReducer from './payment-slice';
 import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
   cart: cartReducer,
+  payment: paymentReducer,
 });
 
 const persistConfig = {
@@ -17,7 +19,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
     }),

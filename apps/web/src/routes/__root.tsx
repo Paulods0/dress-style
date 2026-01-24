@@ -15,12 +15,14 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     const router = useRouterState();
     const currentPath = router.location.pathname;
 
-    const hideComponent = currentPath.startsWith('/auth');
+    const hideOn = ['/auth', '/manufacturer'];
+
+    const hideComponent = hideOn.some((path) => currentPath.startsWith(path));
 
     return (
       <React.Fragment>
         {!hideComponent && <Header />}
-        <main className="p-global-padding-horizontal min-h-screen w-full flex flex-col">
+        <main className='lg:p-global-padding-horizontal p-global-padding-horizontal-mobile min-h-screen w-full flex flex-col'>
           <Outlet />
         </main>
         {!hideComponent && <Footer />}
