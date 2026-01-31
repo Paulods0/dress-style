@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
 
-export const Route = createFileRoute('/manufacturer/onboarding')({
+export const Route = createFileRoute('/(public)/manufacturer/onboarding')({
   component: RouteComponent,
 });
 

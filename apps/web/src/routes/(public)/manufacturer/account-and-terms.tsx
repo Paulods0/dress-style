@@ -6,7 +6,7 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
 
-export const Route = createFileRoute('/manufacturer/account-and-terms')({
+export const Route = createFileRoute('/(public)/manufacturer/account-and-terms')({
   component: RouteComponent,
 });
 

@@ -5,6 +5,7 @@ import Footer from './-components/footer';
 import type { QueryClient } from '@tanstack/react-query';
 
 import { createRootRouteWithContext, Outlet, useRouterState } from '@tanstack/react-router';
+import type { FileRouteTypes } from '@/routeTree.gen';
 
 interface MyRouterContext {
   queryClient: QueryClient;
@@ -15,17 +16,19 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     const router = useRouterState();
     const currentPath = router.location.pathname;
 
-    const hideOn = ['/auth', '/manufacturer'];
+    const hideHeaderOn: FileRouteTypes['to'][] = ['/auth', '/manufacturer'];
+    const hideFooterOn: string[] = ['/auth', '/manufacturer', '/customize'];
 
-    const hideComponent = hideOn.some((path) => currentPath.startsWith(path));
+    const hideHeader = hideHeaderOn.some((path) => currentPath.startsWith(path));
+    const hideFooter = hideFooterOn.some((path) => currentPath.startsWith(path));
 
     return (
       <React.Fragment>
-        {!hideComponent && <Header />}
+        {!hideHeader && <Header />}
         <main className='lg:p-global-padding-horizontal p-global-padding-horizontal-mobile min-h-screen w-full flex flex-col'>
           <Outlet />
         </main>
-        {!hideComponent && <Footer />}
+        {!hideFooter && <Footer />}
       </React.Fragment>
     );
   },

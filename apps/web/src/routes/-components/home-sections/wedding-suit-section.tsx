@@ -1,8 +1,16 @@
 import { ChevronRight } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
+import type { FileRouteTypes } from '@/routeTree.gen';
 
-function WeddingSuitImage({ headline, image, actionLabel }: { headline: string; image: string; actionLabel: string }) {
+interface Props {
+  headline: string;
+  image: string;
+  actionLabel: string;
+  to: FileRouteTypes['to'];
+}
+
+function WeddingSuitImage({ to, headline, image, actionLabel }: Props) {
   return (
     <div className='relative flex items-end w-full h-full'>
       <img alt={headline} src={image} className='absolute inset-0 h-full object-cover w-full' />
@@ -12,7 +20,7 @@ function WeddingSuitImage({ headline, image, actionLabel }: { headline: string; 
           {headline}
         </h3>
 
-        <Link to='/' className='relative top-20 right-20 lg:right-0 lg:top-0'>
+        <Link to={to} className='relative top-20 right-20 lg:right-0 lg:top-0'>
           <Button variant={'outline'} className='uppercase'>
             {actionLabel}
             <ChevronRight />
@@ -26,8 +34,14 @@ function WeddingSuitImage({ headline, image, actionLabel }: { headline: string; 
 export default function WeddingSuitSection() {
   return (
     <section className='grid md:grid-cols-2 grid-cols-1 gap-4 min-h-[750px]'>
-      <WeddingSuitImage headline='coleção de casamento' image='/images/wedding-suit.webp' actionLabel='comprar agora' />
       <WeddingSuitImage
+        to='/'
+        headline='coleção de casamento'
+        image='/images/wedding-suit.webp'
+        actionLabel='comprar agora'
+      />
+      <WeddingSuitImage
+        to='/customize/step-1'
         image='/images/pink-suit.webp'
         actionLabel='personalizar agora'
         headline='personalize o terno ideal para si'

@@ -1,7 +1,5 @@
 import { Link } from '@tanstack/react-router';
 import type { FileRouteTypes } from '@/routeTree.gen';
-
-import { SlBag } from 'react-icons/sl';
 import { LucideUser, MenuIcon, Search } from 'lucide-react';
 import { useAppSelector } from '@/store/hooks';
 import { Button } from '@/components/ui/button';
@@ -19,11 +17,11 @@ const navLinks: NavLinks[] = [
   },
   {
     label: 'Mulher',
-    path: '/woman',
+    path: '/man',
   },
   {
     label: 'Acessórios',
-    path: '/accessories',
+    path: '/man',
   },
 ];
 
