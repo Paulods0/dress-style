@@ -2,35 +2,24 @@ import React from 'react';
 import { Button } from './ui/button';
 import { X, ChevronDown } from 'lucide-react';
 import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from './ui/drawer';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+// import { z } from 'zod';
 
 const drawerFilters = ['tamanho', 'tecido', 'cor', 'estilo', 'preço', 'marca', 'fabricante'] as const;
 
-const manFilterSchema = z.object({
-  size: z.string().optional(),
-  tissue: z.string().optional(),
-  color: z.string().optional(),
-  style: z.string().optional(),
-  price: z.string().optional(),
-  brand: z.string().optional(),
-  manufacturer: z.string().optional(),
-});
+// const manFilterSchema = z.object({
+//   size: z.string().optional(),
+//   tissue: z.string().optional(),
+//   color: z.string().optional(),
+//   style: z.string().optional(),
+//   price: z.string().optional(),
+//   brand: z.string().optional(),
+//   manufacturer: z.string().optional(),
+// });
 
-type ManFilterDTO = z.infer<typeof manFilterSchema>;
+// type ManFilterDTO = z.infer<typeof manFilterSchema>;
 
 export default function ManDrawerFilter() {
   const [isOpen, setIsOpen] = React.useState(false);
-
-  const form = useForm<ManFilterDTO>({
-    resolver: zodResolver(manFilterSchema),
-    defaultValues: {},
-  });
-
-  const handleFilter = (data: ManFilterDTO) => {
-    console.log(data);
-  };
 
   return (
     <Drawer direction='right' open={isOpen} onOpenChange={setIsOpen}>

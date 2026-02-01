@@ -8,6 +8,8 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
@@ -38,6 +40,13 @@ import { Route as privatePaymentStep3RouteImport } from './routes/(private)/paym
 import { Route as privatePaymentStep2RouteImport } from './routes/(private)/payment/step-2'
 import { Route as privatePaymentStep1RouteImport } from './routes/(private)/payment/step-1'
 
+const AuthRouteImport = createFileRoute('/auth')()
+
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -251,6 +260,7 @@ export interface FileRoutesById {
   '/(public)/manufacturer': typeof publicManufacturerRouteRouteWithChildren
   '/(public)/accessories': typeof publicAccessoriesRoute
   '/(public)/cart': typeof publicCartRoute
+  '/auth': typeof AuthRouteWithChildren
   '/auth/_layout': typeof AuthLayoutRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
@@ -343,6 +353,7 @@ export interface FileRouteTypes {
     | '/(public)/manufacturer'
     | '/(public)/accessories'
     | '/(public)/cart'
+    | '/auth'
     | '/auth/_layout'
     | '/auth/sign-in'
     | '/auth/sign-up'
@@ -374,6 +385,7 @@ export interface RootRouteChildren {
   publicManufacturerRouteRoute: typeof publicManufacturerRouteRouteWithChildren
   publicAccessoriesRoute: typeof publicAccessoriesRoute
   publicCartRoute: typeof publicCartRoute
+  AuthRoute: typeof AuthRouteWithChildren
   publicManIdRoute: typeof publicManIdRoute
   publicWomanIdRoute: typeof publicWomanIdRoute
   publicManIndexRoute: typeof publicManIndexRoute
@@ -382,6 +394,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -405,7 +424,7 @@ declare module '@tanstack/react-router' {
     }
     '/auth/_layout': {
       id: '/auth/_layout'
-      path: ''
+      path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthLayoutRouteImport
       parentRoute: typeof AuthRoute
@@ -642,6 +661,20 @@ const publicManufacturerRouteRouteWithChildren =
     publicManufacturerRouteRouteChildren,
   )
 
+interface AuthRouteChildren {
+  AuthLayoutRoute: typeof AuthLayoutRoute
+  AuthSignInRoute: typeof AuthSignInRoute
+  AuthSignUpRoute: typeof AuthSignUpRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthLayoutRoute: AuthLayoutRoute,
+  AuthSignInRoute: AuthSignInRoute,
+  AuthSignUpRoute: AuthSignUpRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   privatePaymentRouteRoute: privatePaymentRouteRouteWithChildren,
@@ -649,6 +682,7 @@ const rootRouteChildren: RootRouteChildren = {
   publicManufacturerRouteRoute: publicManufacturerRouteRouteWithChildren,
   publicAccessoriesRoute: publicAccessoriesRoute,
   publicCartRoute: publicCartRoute,
+  AuthRoute: AuthRouteWithChildren,
   publicManIdRoute: publicManIdRoute,
   publicWomanIdRoute: publicWomanIdRoute,
   publicManIndexRoute: publicManIndexRoute,
