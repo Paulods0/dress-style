@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from './ui/button';
 import { ChevronDown } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
+import MeasureRecommender from './measure-recommender';
 
 const collapsibleOptions = [
   { id: 1, label: '46' },
@@ -28,6 +29,7 @@ export default function SelectSize() {
           </Button>
         </CollapsibleTrigger>
         <CollapsibleContent className='flex flex-col border w-full p-4'>
+          <MeasureRecommender />
           {collapsibleOptions.map((option) => (
             <div
               key={option.id}

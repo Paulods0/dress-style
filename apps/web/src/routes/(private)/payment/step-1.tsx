@@ -58,10 +58,12 @@ function RouteComponent() {
   };
 
   return (
-    <div className='page-container '>
+    <div className='page-container'>
       <FormProvider {...form}>
         <Form {...form}>
-          <form className='grid grid-cols-[auto_400px] gap-12' onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className='grid grid-cols-1 lg:grid-cols-[auto_400px] gap-4 lg:gap-12'
+            onSubmit={handleSubmit(onSubmit)}>
             <div className='flex flex-col gap-2 w-full'>
               <h3 className='uppercase'>informação de envio</h3>
 

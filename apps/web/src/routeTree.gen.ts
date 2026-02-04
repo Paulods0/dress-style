@@ -8,8 +8,6 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
-
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
@@ -19,9 +17,11 @@ import { Route as publicCartRouteImport } from './routes/(public)/cart'
 import { Route as publicAccessoriesRouteImport } from './routes/(public)/accessories'
 import { Route as publicManufacturerRouteRouteImport } from './routes/(public)/manufacturer/route'
 import { Route as publicCustomizeRouteRouteImport } from './routes/(public)/customize/route'
+import { Route as publicClientAreaRouteRouteImport } from './routes/(public)/client-area/route'
 import { Route as privatePaymentRouteRouteImport } from './routes/(private)/payment/route'
 import { Route as publicWomanIndexRouteImport } from './routes/(public)/woman/index'
 import { Route as publicManIndexRouteImport } from './routes/(public)/man/index'
+import { Route as privateCatalogIndexRouteImport } from './routes/(private)/catalog/index'
 import { Route as publicWomanIdRouteImport } from './routes/(public)/woman/$id'
 import { Route as publicManufacturerRegisteredRouteImport } from './routes/(public)/manufacturer/registered'
 import { Route as publicManufacturerRegisterRouteImport } from './routes/(public)/manufacturer/register'
@@ -35,18 +35,16 @@ import { Route as publicCustomizeStep4RouteImport } from './routes/(public)/cust
 import { Route as publicCustomizeStep3RouteImport } from './routes/(public)/customize/step-3'
 import { Route as publicCustomizeStep2RouteImport } from './routes/(public)/customize/step-2'
 import { Route as publicCustomizeStep1RouteImport } from './routes/(public)/customize/step-1'
+import { Route as publicClientAreaPurchaseHistoryRouteImport } from './routes/(public)/client-area/purchase-history'
+import { Route as publicClientAreaProfileRouteImport } from './routes/(public)/client-area/profile'
+import { Route as publicClientAreaNotificationsAndPreferencesRouteImport } from './routes/(public)/client-area/notifications-and-preferences'
+import { Route as publicClientAreaMeasurementDataRouteImport } from './routes/(public)/client-area/measurement-data'
+import { Route as publicClientAreaAppointmentsRouteImport } from './routes/(public)/client-area/appointments'
 import { Route as privatePaymentStepInitialRouteImport } from './routes/(private)/payment/step-initial'
 import { Route as privatePaymentStep3RouteImport } from './routes/(private)/payment/step-3'
 import { Route as privatePaymentStep2RouteImport } from './routes/(private)/payment/step-2'
 import { Route as privatePaymentStep1RouteImport } from './routes/(private)/payment/step-1'
 
-const AuthRouteImport = createFileRoute('/auth')()
-
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -86,6 +84,11 @@ const publicCustomizeRouteRoute = publicCustomizeRouteRouteImport.update({
   path: '/customize',
   getParentRoute: () => rootRouteImport,
 } as any)
+const publicClientAreaRouteRoute = publicClientAreaRouteRouteImport.update({
+  id: '/(public)/client-area',
+  path: '/client-area',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const privatePaymentRouteRoute = privatePaymentRouteRouteImport.update({
   id: '/(private)/payment',
   path: '/payment',
@@ -99,6 +102,11 @@ const publicWomanIndexRoute = publicWomanIndexRouteImport.update({
 const publicManIndexRoute = publicManIndexRouteImport.update({
   id: '/(public)/man/',
   path: '/man/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const privateCatalogIndexRoute = privateCatalogIndexRouteImport.update({
+  id: '/(private)/catalog/',
+  path: '/catalog/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const publicWomanIdRoute = publicWomanIdRouteImport.update({
@@ -170,6 +178,35 @@ const publicCustomizeStep1Route = publicCustomizeStep1RouteImport.update({
   path: '/step-1',
   getParentRoute: () => publicCustomizeRouteRoute,
 } as any)
+const publicClientAreaPurchaseHistoryRoute =
+  publicClientAreaPurchaseHistoryRouteImport.update({
+    id: '/purchase-history',
+    path: '/purchase-history',
+    getParentRoute: () => publicClientAreaRouteRoute,
+  } as any)
+const publicClientAreaProfileRoute = publicClientAreaProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => publicClientAreaRouteRoute,
+} as any)
+const publicClientAreaNotificationsAndPreferencesRoute =
+  publicClientAreaNotificationsAndPreferencesRouteImport.update({
+    id: '/notifications-and-preferences',
+    path: '/notifications-and-preferences',
+    getParentRoute: () => publicClientAreaRouteRoute,
+  } as any)
+const publicClientAreaMeasurementDataRoute =
+  publicClientAreaMeasurementDataRouteImport.update({
+    id: '/measurement-data',
+    path: '/measurement-data',
+    getParentRoute: () => publicClientAreaRouteRoute,
+  } as any)
+const publicClientAreaAppointmentsRoute =
+  publicClientAreaAppointmentsRouteImport.update({
+    id: '/appointments',
+    path: '/appointments',
+    getParentRoute: () => publicClientAreaRouteRoute,
+  } as any)
 const privatePaymentStepInitialRoute =
   privatePaymentStepInitialRouteImport.update({
     id: '/step-initial',
@@ -195,6 +232,7 @@ const privatePaymentStep1Route = privatePaymentStep1RouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/payment': typeof privatePaymentRouteRouteWithChildren
+  '/client-area': typeof publicClientAreaRouteRouteWithChildren
   '/customize': typeof publicCustomizeRouteRouteWithChildren
   '/manufacturer': typeof publicManufacturerRouteRouteWithChildren
   '/accessories': typeof publicAccessoriesRoute
@@ -206,6 +244,11 @@ export interface FileRoutesByFullPath {
   '/payment/step-2': typeof privatePaymentStep2Route
   '/payment/step-3': typeof privatePaymentStep3Route
   '/payment/step-initial': typeof privatePaymentStepInitialRoute
+  '/client-area/appointments': typeof publicClientAreaAppointmentsRoute
+  '/client-area/measurement-data': typeof publicClientAreaMeasurementDataRoute
+  '/client-area/notifications-and-preferences': typeof publicClientAreaNotificationsAndPreferencesRoute
+  '/client-area/profile': typeof publicClientAreaProfileRoute
+  '/client-area/purchase-history': typeof publicClientAreaPurchaseHistoryRoute
   '/customize/step-1': typeof publicCustomizeStep1Route
   '/customize/step-2': typeof publicCustomizeStep2Route
   '/customize/step-3': typeof publicCustomizeStep3Route
@@ -219,12 +262,14 @@ export interface FileRoutesByFullPath {
   '/manufacturer/register': typeof publicManufacturerRegisterRoute
   '/manufacturer/registered': typeof publicManufacturerRegisteredRoute
   '/woman/$id': typeof publicWomanIdRoute
+  '/catalog': typeof privateCatalogIndexRoute
   '/man': typeof publicManIndexRoute
   '/woman': typeof publicWomanIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/payment': typeof privatePaymentRouteRouteWithChildren
+  '/client-area': typeof publicClientAreaRouteRouteWithChildren
   '/customize': typeof publicCustomizeRouteRouteWithChildren
   '/manufacturer': typeof publicManufacturerRouteRouteWithChildren
   '/accessories': typeof publicAccessoriesRoute
@@ -236,6 +281,11 @@ export interface FileRoutesByTo {
   '/payment/step-2': typeof privatePaymentStep2Route
   '/payment/step-3': typeof privatePaymentStep3Route
   '/payment/step-initial': typeof privatePaymentStepInitialRoute
+  '/client-area/appointments': typeof publicClientAreaAppointmentsRoute
+  '/client-area/measurement-data': typeof publicClientAreaMeasurementDataRoute
+  '/client-area/notifications-and-preferences': typeof publicClientAreaNotificationsAndPreferencesRoute
+  '/client-area/profile': typeof publicClientAreaProfileRoute
+  '/client-area/purchase-history': typeof publicClientAreaPurchaseHistoryRoute
   '/customize/step-1': typeof publicCustomizeStep1Route
   '/customize/step-2': typeof publicCustomizeStep2Route
   '/customize/step-3': typeof publicCustomizeStep3Route
@@ -249,6 +299,7 @@ export interface FileRoutesByTo {
   '/manufacturer/register': typeof publicManufacturerRegisterRoute
   '/manufacturer/registered': typeof publicManufacturerRegisteredRoute
   '/woman/$id': typeof publicWomanIdRoute
+  '/catalog': typeof privateCatalogIndexRoute
   '/man': typeof publicManIndexRoute
   '/woman': typeof publicWomanIndexRoute
 }
@@ -256,11 +307,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/(private)/payment': typeof privatePaymentRouteRouteWithChildren
+  '/(public)/client-area': typeof publicClientAreaRouteRouteWithChildren
   '/(public)/customize': typeof publicCustomizeRouteRouteWithChildren
   '/(public)/manufacturer': typeof publicManufacturerRouteRouteWithChildren
   '/(public)/accessories': typeof publicAccessoriesRoute
   '/(public)/cart': typeof publicCartRoute
-  '/auth': typeof AuthRouteWithChildren
   '/auth/_layout': typeof AuthLayoutRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
@@ -268,6 +319,11 @@ export interface FileRoutesById {
   '/(private)/payment/step-2': typeof privatePaymentStep2Route
   '/(private)/payment/step-3': typeof privatePaymentStep3Route
   '/(private)/payment/step-initial': typeof privatePaymentStepInitialRoute
+  '/(public)/client-area/appointments': typeof publicClientAreaAppointmentsRoute
+  '/(public)/client-area/measurement-data': typeof publicClientAreaMeasurementDataRoute
+  '/(public)/client-area/notifications-and-preferences': typeof publicClientAreaNotificationsAndPreferencesRoute
+  '/(public)/client-area/profile': typeof publicClientAreaProfileRoute
+  '/(public)/client-area/purchase-history': typeof publicClientAreaPurchaseHistoryRoute
   '/(public)/customize/step-1': typeof publicCustomizeStep1Route
   '/(public)/customize/step-2': typeof publicCustomizeStep2Route
   '/(public)/customize/step-3': typeof publicCustomizeStep3Route
@@ -281,6 +337,7 @@ export interface FileRoutesById {
   '/(public)/manufacturer/register': typeof publicManufacturerRegisterRoute
   '/(public)/manufacturer/registered': typeof publicManufacturerRegisteredRoute
   '/(public)/woman/$id': typeof publicWomanIdRoute
+  '/(private)/catalog/': typeof privateCatalogIndexRoute
   '/(public)/man/': typeof publicManIndexRoute
   '/(public)/woman/': typeof publicWomanIndexRoute
 }
@@ -289,6 +346,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/payment'
+    | '/client-area'
     | '/customize'
     | '/manufacturer'
     | '/accessories'
@@ -300,6 +358,11 @@ export interface FileRouteTypes {
     | '/payment/step-2'
     | '/payment/step-3'
     | '/payment/step-initial'
+    | '/client-area/appointments'
+    | '/client-area/measurement-data'
+    | '/client-area/notifications-and-preferences'
+    | '/client-area/profile'
+    | '/client-area/purchase-history'
     | '/customize/step-1'
     | '/customize/step-2'
     | '/customize/step-3'
@@ -313,12 +376,14 @@ export interface FileRouteTypes {
     | '/manufacturer/register'
     | '/manufacturer/registered'
     | '/woman/$id'
+    | '/catalog'
     | '/man'
     | '/woman'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/payment'
+    | '/client-area'
     | '/customize'
     | '/manufacturer'
     | '/accessories'
@@ -330,6 +395,11 @@ export interface FileRouteTypes {
     | '/payment/step-2'
     | '/payment/step-3'
     | '/payment/step-initial'
+    | '/client-area/appointments'
+    | '/client-area/measurement-data'
+    | '/client-area/notifications-and-preferences'
+    | '/client-area/profile'
+    | '/client-area/purchase-history'
     | '/customize/step-1'
     | '/customize/step-2'
     | '/customize/step-3'
@@ -343,17 +413,18 @@ export interface FileRouteTypes {
     | '/manufacturer/register'
     | '/manufacturer/registered'
     | '/woman/$id'
+    | '/catalog'
     | '/man'
     | '/woman'
   id:
     | '__root__'
     | '/'
     | '/(private)/payment'
+    | '/(public)/client-area'
     | '/(public)/customize'
     | '/(public)/manufacturer'
     | '/(public)/accessories'
     | '/(public)/cart'
-    | '/auth'
     | '/auth/_layout'
     | '/auth/sign-in'
     | '/auth/sign-up'
@@ -361,6 +432,11 @@ export interface FileRouteTypes {
     | '/(private)/payment/step-2'
     | '/(private)/payment/step-3'
     | '/(private)/payment/step-initial'
+    | '/(public)/client-area/appointments'
+    | '/(public)/client-area/measurement-data'
+    | '/(public)/client-area/notifications-and-preferences'
+    | '/(public)/client-area/profile'
+    | '/(public)/client-area/purchase-history'
     | '/(public)/customize/step-1'
     | '/(public)/customize/step-2'
     | '/(public)/customize/step-3'
@@ -374,6 +450,7 @@ export interface FileRouteTypes {
     | '/(public)/manufacturer/register'
     | '/(public)/manufacturer/registered'
     | '/(public)/woman/$id'
+    | '/(private)/catalog/'
     | '/(public)/man/'
     | '/(public)/woman/'
   fileRoutesById: FileRoutesById
@@ -381,26 +458,20 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   privatePaymentRouteRoute: typeof privatePaymentRouteRouteWithChildren
+  publicClientAreaRouteRoute: typeof publicClientAreaRouteRouteWithChildren
   publicCustomizeRouteRoute: typeof publicCustomizeRouteRouteWithChildren
   publicManufacturerRouteRoute: typeof publicManufacturerRouteRouteWithChildren
   publicAccessoriesRoute: typeof publicAccessoriesRoute
   publicCartRoute: typeof publicCartRoute
-  AuthRoute: typeof AuthRouteWithChildren
   publicManIdRoute: typeof publicManIdRoute
   publicWomanIdRoute: typeof publicWomanIdRoute
+  privateCatalogIndexRoute: typeof privateCatalogIndexRoute
   publicManIndexRoute: typeof publicManIndexRoute
   publicWomanIndexRoute: typeof publicWomanIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -424,7 +495,7 @@ declare module '@tanstack/react-router' {
     }
     '/auth/_layout': {
       id: '/auth/_layout'
-      path: '/auth'
+      path: ''
       fullPath: '/auth'
       preLoaderRoute: typeof AuthLayoutRouteImport
       parentRoute: typeof AuthRoute
@@ -457,6 +528,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicCustomizeRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(public)/client-area': {
+      id: '/(public)/client-area'
+      path: '/client-area'
+      fullPath: '/client-area'
+      preLoaderRoute: typeof publicClientAreaRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(private)/payment': {
       id: '/(private)/payment'
       path: '/payment'
@@ -476,6 +554,13 @@ declare module '@tanstack/react-router' {
       path: '/man'
       fullPath: '/man'
       preLoaderRoute: typeof publicManIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(private)/catalog/': {
+      id: '/(private)/catalog/'
+      path: '/catalog'
+      fullPath: '/catalog'
+      preLoaderRoute: typeof privateCatalogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(public)/woman/$id': {
@@ -569,6 +654,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicCustomizeStep1RouteImport
       parentRoute: typeof publicCustomizeRouteRoute
     }
+    '/(public)/client-area/purchase-history': {
+      id: '/(public)/client-area/purchase-history'
+      path: '/purchase-history'
+      fullPath: '/client-area/purchase-history'
+      preLoaderRoute: typeof publicClientAreaPurchaseHistoryRouteImport
+      parentRoute: typeof publicClientAreaRouteRoute
+    }
+    '/(public)/client-area/profile': {
+      id: '/(public)/client-area/profile'
+      path: '/profile'
+      fullPath: '/client-area/profile'
+      preLoaderRoute: typeof publicClientAreaProfileRouteImport
+      parentRoute: typeof publicClientAreaRouteRoute
+    }
+    '/(public)/client-area/notifications-and-preferences': {
+      id: '/(public)/client-area/notifications-and-preferences'
+      path: '/notifications-and-preferences'
+      fullPath: '/client-area/notifications-and-preferences'
+      preLoaderRoute: typeof publicClientAreaNotificationsAndPreferencesRouteImport
+      parentRoute: typeof publicClientAreaRouteRoute
+    }
+    '/(public)/client-area/measurement-data': {
+      id: '/(public)/client-area/measurement-data'
+      path: '/measurement-data'
+      fullPath: '/client-area/measurement-data'
+      preLoaderRoute: typeof publicClientAreaMeasurementDataRouteImport
+      parentRoute: typeof publicClientAreaRouteRoute
+    }
+    '/(public)/client-area/appointments': {
+      id: '/(public)/client-area/appointments'
+      path: '/appointments'
+      fullPath: '/client-area/appointments'
+      preLoaderRoute: typeof publicClientAreaAppointmentsRouteImport
+      parentRoute: typeof publicClientAreaRouteRoute
+    }
     '/(private)/payment/step-initial': {
       id: '/(private)/payment/step-initial'
       path: '/step-initial'
@@ -617,6 +737,28 @@ const privatePaymentRouteRouteChildren: privatePaymentRouteRouteChildren = {
 const privatePaymentRouteRouteWithChildren =
   privatePaymentRouteRoute._addFileChildren(privatePaymentRouteRouteChildren)
 
+interface publicClientAreaRouteRouteChildren {
+  publicClientAreaAppointmentsRoute: typeof publicClientAreaAppointmentsRoute
+  publicClientAreaMeasurementDataRoute: typeof publicClientAreaMeasurementDataRoute
+  publicClientAreaNotificationsAndPreferencesRoute: typeof publicClientAreaNotificationsAndPreferencesRoute
+  publicClientAreaProfileRoute: typeof publicClientAreaProfileRoute
+  publicClientAreaPurchaseHistoryRoute: typeof publicClientAreaPurchaseHistoryRoute
+}
+
+const publicClientAreaRouteRouteChildren: publicClientAreaRouteRouteChildren = {
+  publicClientAreaAppointmentsRoute: publicClientAreaAppointmentsRoute,
+  publicClientAreaMeasurementDataRoute: publicClientAreaMeasurementDataRoute,
+  publicClientAreaNotificationsAndPreferencesRoute:
+    publicClientAreaNotificationsAndPreferencesRoute,
+  publicClientAreaProfileRoute: publicClientAreaProfileRoute,
+  publicClientAreaPurchaseHistoryRoute: publicClientAreaPurchaseHistoryRoute,
+}
+
+const publicClientAreaRouteRouteWithChildren =
+  publicClientAreaRouteRoute._addFileChildren(
+    publicClientAreaRouteRouteChildren,
+  )
+
 interface publicCustomizeRouteRouteChildren {
   publicCustomizeStep1Route: typeof publicCustomizeStep1Route
   publicCustomizeStep2Route: typeof publicCustomizeStep2Route
@@ -661,30 +803,17 @@ const publicManufacturerRouteRouteWithChildren =
     publicManufacturerRouteRouteChildren,
   )
 
-interface AuthRouteChildren {
-  AuthLayoutRoute: typeof AuthLayoutRoute
-  AuthSignInRoute: typeof AuthSignInRoute
-  AuthSignUpRoute: typeof AuthSignUpRoute
-}
-
-const AuthRouteChildren: AuthRouteChildren = {
-  AuthLayoutRoute: AuthLayoutRoute,
-  AuthSignInRoute: AuthSignInRoute,
-  AuthSignUpRoute: AuthSignUpRoute,
-}
-
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   privatePaymentRouteRoute: privatePaymentRouteRouteWithChildren,
+  publicClientAreaRouteRoute: publicClientAreaRouteRouteWithChildren,
   publicCustomizeRouteRoute: publicCustomizeRouteRouteWithChildren,
   publicManufacturerRouteRoute: publicManufacturerRouteRouteWithChildren,
   publicAccessoriesRoute: publicAccessoriesRoute,
   publicCartRoute: publicCartRoute,
-  AuthRoute: AuthRouteWithChildren,
   publicManIdRoute: publicManIdRoute,
   publicWomanIdRoute: publicWomanIdRoute,
+  privateCatalogIndexRoute: privateCatalogIndexRoute,
   publicManIndexRoute: publicManIndexRoute,
   publicWomanIndexRoute: publicWomanIndexRoute,
 }

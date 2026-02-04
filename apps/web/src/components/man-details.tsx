@@ -6,6 +6,7 @@ import { SUITS_DATA, type Suit } from '@/db';
 import { addItem } from '@/store/cart-slice';
 import { useAppDispatch } from '@/store/hooks';
 import CollapsibleColor from './collapsible-color';
+import { Link } from '@tanstack/react-router';
 
 type Props = {
   id: string;
@@ -41,10 +42,10 @@ export default function ManDetails({ id, currentItem }: Props) {
       </div>
 
       <div className='flex flex-col gap-6 w-full h-full p-2'>
-        <div className='flex items-center gap-4'>
+        <Link to={'/catalog'} className='flex items-center gap-4'>
           <img src='/svg/dress-style.png' className='size-12' alt='' />
           <p className='capitalize'>dress style</p>
-        </div>
+        </Link>
 
         <div className='flex w-full justify-between items-center'>
           <div className='flex flex-col gap-1'>

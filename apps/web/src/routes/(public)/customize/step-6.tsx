@@ -20,7 +20,7 @@ function RouteComponent() {
   return (
     <CustomizeContainer title='abdómen' backTo='/customize/step-5'>
       <div className='flex flex-col gap-4 w-full'>
-        <div className='flex items-center w-full gap-10 justify-between'>
+        <div className='flex items-center overflow-x-auto w-full gap-4 lg:gap-10 lg:justify-between'>
           {absTypes.map((abs) => (
             <AbsType
               {...abs}
@@ -53,9 +53,12 @@ const AbsType = ({ image, label, selected, onSelect }: AbsTypeProps) => {
   return (
     <div
       onClick={onSelect}
-      className={cn('flex cursor-pointer group flex-col items-center gap-4', selected && 'shadow-md')}>
+      className={cn(
+        'flex shrink-0 cursor-pointer hover:bg-zinc-100 duration-200 ease-in-out group p-3 flex-col items-center gap-4',
+        selected && 'bg-zinc-200'
+      )}>
       <img src={image} alt={label} className='size-[200px] object-cover' />
-      <span className='uppercase group-hover:underline'>{label}</span>
+      <span className='uppercase'>{label}</span>
     </div>
   );
 };

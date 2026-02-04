@@ -26,9 +26,9 @@ const paymentMethods: PaymentMethodProps[] = [
 function RouteComponent() {
   return (
     <div className='page-container'>
-      <div className='grid grid-cols-[auto_350px] gap-12'>
+      <div className='grid grid-cols-1 lg:grid-cols-[auto_350px] gap-4 lg:gap-12'>
         <div className='flex flex-col gap-4'>
-          <h2>escolha o seu metodo de envio</h2>
+          <h2>Escolha o seu metodo de envio</h2>
           <ul className='flex flex-col gap-4'>
             {paymentMethods.map((method) => (
               <li key={method.id} className='border border-border h-20 flex justify-between items-center px-4'>
@@ -41,7 +41,6 @@ function RouteComponent() {
             ))}
           </ul>
         </div>
-
         <Resume />
       </div>
     </div>
